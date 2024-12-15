@@ -43,13 +43,7 @@
                 alt=""
                 class="photo absolute top-12 left-8 "
               /> 
-              <div
-              class="flex text-center flex-col  absolute top-14 right-5"
-            >
-              <button  ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-              <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-              <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-            </div>
+              
               <div
                 class="name absolute bottom-16  font-semibold player-name-card "
               >
@@ -114,13 +108,7 @@
                             alt=""
                             class="photo absolute top-12 left-8 "
                           /> 
-                          <div
-                          class="flex text-center flex-col  absolute top-14 right-5"
-                        >
-                          <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                          <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                    <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                        </div> 
+                          
                           <div
                             class="name absolute bottom-16  font-semibold player-name-card "
                           >
@@ -184,13 +172,7 @@
                         alt=""
                         class="photo absolute top-12 left-8 "
                       /> 
-                      <div
-                      class="flex text-center flex-col  absolute top-14 right-5"
-                    >
-                      <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                      <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                    <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                    </div> 
+                      
                       <div
                         class="name absolute bottom-16  font-semibold player-name-card "
                       >
@@ -254,13 +236,7 @@
                           alt=""
                           class="photo absolute top-12 left-8 "
                         /> 
-                        <div
-                        class="flex text-center flex-col  absolute top-14 right-5"
-                      >
-                        <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                        <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                  <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                      </div> 
+                        
                         <div
                           class="name absolute bottom-16  font-semibold player-name-card "
                         >
@@ -324,13 +300,7 @@
                         alt=""
                         class="photo absolute top-12 left-8 "
                       /> 
-                      <div
-                      class="flex text-center flex-col  absolute top-14 right-5"
-                    >
-                      <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                      <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                    </div> 
+                     
                       <div
                         class="name absolute bottom-16  font-semibold player-name-card "
                       >
@@ -394,13 +364,7 @@
                           alt=""
                           class="photo absolute top-12 left-8 "
                         /> 
-                        <div
-                        class="flex text-center flex-col  absolute top-14 right-5"
-                      >
-                        <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                        <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                  <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                      </div> 
+                        
                         <div
                           class="name absolute bottom-16  font-semibold player-name-card "
                         >
@@ -464,13 +428,7 @@
                           alt=""
                           class="photo absolute top-12 left-8 "
                         /> 
-                        <div
-                        class="flex text-center flex-col  absolute top-14 right-5"
-                      >
-                        <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                        <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                  <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                      </div> 
+                        
                         <div
                           class="name absolute bottom-16  font-semibold player-name-card "
                         >
@@ -534,13 +492,7 @@
                         alt=""
                         class="photo absolute top-12 left-8 "
                       /> 
-                      <div
-                      class="flex text-center flex-col  absolute top-14 right-5"
-                    >
-                      <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                      <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                    </div> 
+                      
                       <div
                         class="name absolute bottom-16  font-semibold player-name-card "
                       >
@@ -604,13 +556,7 @@
                       alt=""
                       class="photo absolute top-12 left-8 "
                     /> 
-                    <div
-                    class="flex text-center flex-col  absolute top-14 right-5"
-                  >
-                    <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                    <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-              <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                  </div> 
+                    
                     <div
                       class="name absolute bottom-16  font-semibold player-name-card "
                     >
@@ -674,13 +620,7 @@
                     alt=""
                     class="photo absolute top-12 left-8 "
                   /> 
-                  <div
-                  class="flex text-center flex-col  absolute top-14 right-5"
-                >
-                  <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                  <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-            <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                </div> 
+                  
                   <div
                     class="name absolute bottom-16  font-semibold player-name-card "
                   >
@@ -744,13 +684,7 @@
                           alt=""
                           class="photo absolute top-12 left-8 "
                         /> 
-                        <div
-                        class="flex text-center flex-col  absolute top-14 right-5"
-                      >
-                        <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                        <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                  <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                      </div> 
+                        
                         <div
                           class="name absolute bottom-16  font-semibold player-name-card "
                         >
@@ -814,13 +748,7 @@
                         alt=""
                         class="photo absolute top-12 left-8 "
                       /> 
-                      <div
-                      class="flex text-center flex-col  absolute top-14 right-5"
-                    >
-                      <button ><i class="iconeUpdate fa-solid fa-pen-to-square" style="color: #0ca201;"></i></button>
-                      <button ><i class="btnDelete fa-solid fa-trash" style="color: #fe0101;"></i></button>
-                <button ><i class="iconeChangement fa-solid fa-repeat" style="color: #2900f5;"></i></button>    
-                    </div> 
+                     
                       <div
                         class="name absolute bottom-16  font-semibold player-name-card "
                       >
@@ -877,5 +805,12 @@
     </section>
 
     <script src="script.js"></script>
+
+  
   </body>
 </html>
+
+<?php
+    include("DBConnexion.php");
+    
+?>
