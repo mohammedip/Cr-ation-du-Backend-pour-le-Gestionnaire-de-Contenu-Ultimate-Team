@@ -13,7 +13,7 @@ logo VARCHAR(255)
 );
 CREATE TABLE positions(
 position_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-posiition VARCHAR(50)
+posiition enum('RW','ST','CM','CB','LW','GK','CDM','LB','RB')
 );
 CREATE TABLE goalkeepers_statistiques(
 goalkeeper_statistiques_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
