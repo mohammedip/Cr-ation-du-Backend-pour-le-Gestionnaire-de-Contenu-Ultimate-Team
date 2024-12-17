@@ -812,5 +812,5 @@
 
 <?php
     include("DBConnexion.php");
-    
+    include("CRUD.php");
 ?>
