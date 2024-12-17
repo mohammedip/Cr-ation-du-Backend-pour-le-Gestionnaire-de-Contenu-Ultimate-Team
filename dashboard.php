@@ -1,3 +1,9 @@
+<?php
+    include("DBConnexion.php");
+    include("CRUD.php");
+$arr =["morocco","argentine","spain","tunisia"]
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +17,14 @@
 <body class="bg-gray-100">
     <div class="flex">
         <aside class="w-64 bg-gray-800 text-white h-screen">
-            <div class="p-4 text-center font-bold text-lg border-b border-gray-700">
-                My Dashboard
+            <div class="p-4 text-center font-bold text-2xl border-b border-gray-700">
+                Admin
             </div>
             <nav class="mt-6 ">
-                <button id="btnPlayers" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("playerTable","nationalityTable","clubTable","Add Player")'>Players</button>
-                <button id="btnNationalities" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("nationalityTable","playerTable","clubTable","Add Nationality")'>Nationalities</button>
-                <button id="btnClubs" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("clubTable","nationalityTable","playerTable","Add Club")'>Clubs</button>
+                <button id="btnNationalities" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("nationalityTable","playerTable","clubTable","goalKeeperTable","Add Nationality")'>Nationalities</button>
+                <button id="btnClubs" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("clubTable","nationalityTable","playerTable","goalKeeperTable","Add Club")'>Clubs</button>
+                <button id="btnPlayers" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("playerTable","nationalityTable","clubTable","goalKeeperTable","Add Player")'>Players</button>
+                <button id="btnGoalKeepers" class=" block py-2.5 px-4 hover:bg-gray-700 w-full text-left" onclick='switchTable("goalKeeperTable","clubTable","nationalityTable","playerTable","Add GoalKeeper")'>GoalKeeper</button>
             </nav>
         </aside>
 
@@ -29,19 +36,19 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6 text-center">
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-lg font-semibold">Players</h2>
-                    <p class="text-2xl font-bold mt-2">1,245</p>
+                    <p class="text-2xl font-bold mt-2"><?php echo $player_count; ?></p>
                 </div>
                 <div class="bg-white p-6 rounded shadow">
-                    <h2 class="text-lg font-semibold">GolKeper</h2>
-                    <p class="text-2xl font-bold mt-2">500</p>
+                    <h2 class="text-lg font-semibold">GoalKeeper</h2>
+                    <p class="text-2xl font-bold mt-2"><?php echo $goalkeeper_count; ?></p>
                 </div>
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-lg font-semibold">Nationality</h2>
-                    <p class="text-2xl font-bold mt-2">650</p>
+                    <p class="text-2xl font-bold mt-2"><?php echo $nationality_count; ?></p>
                 </div>
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-lg font-semibold">Clubs</h2>
-                    <p class="text-2xl font-bold mt-2">650</p>
+                    <p class="text-2xl font-bold mt-2"><?php echo $club_count; ?></p>
                 </div>
             </div>
 
@@ -53,9 +60,43 @@
                 <table id="playerTable" class="w-full border-collapse text-center">
                     <thead>
                         <tr class="bg-gray-100 border-b">
+                            <th class="py-2 px-4 hidden">id</th>
                             <th class="py-2 px-4">Player</th>
                             <th class="py-2 px-4">Name</th>
                             <th class="py-2 px-4">Position</th>
+                            <th class="py-2 px-4">nationality</th>
+                            <th class="py-2 px-4">Club</th>
+                            <th class="py-2 px-4">Rating</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                                        
+                                        foreach ($playerData as $row){
+                                            echo '<tr class="border-b">
+                                            <td class="py-2 px-4 hidden">'.$row['palayer_id'].'</td>
+                                            <td class="py-2 px-4 flex justify-center"> <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="w-12"/> </td>
+                                            <td class="py-2 px-4">'.$row['nom'].'</td>
+                                            <td class="py-2 px-4">'.$row['posiition'].'</td>
+                                            <td class="py-2 px-4">'.$row['nationality'].'</td>
+                                            <td class="py-2 px-4">Real madrid</td>
+                                            <td class="py-2 px-4 ">'.$row['rating'].'</td>
+                                            <td> 
+                                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
+                                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
+                                            </td>    
+                                        </tr>';
+                                        }
+                        ?>
+                        
+                    </tbody>
+                </table>
+                <table id="goalKeeperTable" class="w-full border-collapse text-center hidden">
+                    <thead>
+                        <tr class="bg-gray-100 border-b">
+                            <th class="py-2 px-4">Player</th>
+                            <th class="py-2 px-4">Name</th>
                             <th class="py-2 px-4">nationality</th>
                             <th class="py-2 px-4">Club</th>
                             <th class="py-2 px-4">Rating</th>
@@ -67,37 +108,12 @@
                             <td class="py-2 px-4 flex justify-center"> <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="w-12"/> </td>
                             <td class="py-2 px-4">#001</td>
                             <td class="py-2 px-4">$150</td>
-                            <td class="py-2 px-4">Completed</td>
                             <td class="py-2 px-4">$150</td>
                             <td class="py-2 px-4 ">25</td>
                             <td> 
                                 <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
                                 <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
                             </td>    
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-2 px-4 flex justify-center"> <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="w-12"/></td>
-                            <td class="py-2 px-4">#002</td>
-                            <td class="py-2 px-4">$200</td>
-                            <td class="py-2 px-4">Pending</td>
-                            <td class="py-2 px-4">$200</td>
-                            <td class="py-2 px-4">14</td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td> 
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-2 px-4 flex justify-center"> <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="w-12"/></td>
-                            <td class="py-2 px-4">#003</td>
-                            <td class="py-2 px-4">$300</td>
-                            <td class="py-2 px-4">Failed</td>
-                            <td class="py-2 px-4">$300</td>
-                            <td class="py-2 px-4">47</td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td> 
                         </tr>
                     </tbody>
                 </table>
@@ -118,15 +134,6 @@
                                 <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
                             </td>    
                         </tr>
-                        <tr class="border-b">
-                            <td class="py-2 px-4"> #002</td>
-                            <td class="py-2 px-4  flex justify-center"><img src="https://cdn.sofifa.net/flags/ar.png" alt="" class="w-12"/></td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td> 
-                        </tr>
-                        
                     </tbody>
                 </table>
                 <table id="clubTable" class="w-full border-collapse text-center hidden">
@@ -146,15 +153,6 @@
                                 <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
                             </td>    
                         </tr>
-                        <tr class="border-b">
-                            <td class="py-2 px-4">#002 </td>
-                            <td class="py-2 px-4 flex justify-center"><img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="w-12"/></td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td> 
-                        </tr>
-                        
                     </tbody>
                 </table>
                
@@ -163,16 +161,45 @@
             <div class="task-modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 " id="modal-task">
                     <div class="modal-dialog bg-white rounded-lg shadow-lg min-w-[620px] max-w-[620px]">
                         <div class="modal-content ">
-                        <form method="POST" id="form-player" class="p-4">
-                            <!-- Header -->
+                        <form method="POST" id="form-player" class="p-4" enctype="multipart/form-data" action="dashboard.php">
+                            
                             <div class="modal-header flex justify-between items-center border-b pb-3">
-                            <h5 class="text-lg font-semibold">Add Player</h5>
+                            <h5 id="formTitle" class="text-lg font-semibold">Add Player</h5>
                             <button id="close"><i class="fa-solid fa-xmark fa-xl" style="color: #8a8f99;"></i></button>
                             </div>
 
-                            <!-- Body -->
-                            <div class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[85vh] ">
-                            <!-- Hidden Input -->
+                            <!--Nationality_form-->
+
+                            <div id="nationality_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden">
+                                <div>
+                                    <label for="Nationality-name" class="block text-lg font-medium text-gray-700">Nationality</label>
+                                    <input type="text" id="Nationality-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                </div>
+
+                                <div>
+                                    <label for="flag-photo" class="block text-lg font-medium text-gray-700">Flag</label>
+                                    <input type="url" id="flag-photo" placeholder="Flag URL" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                </div>
+                            </div>
+
+                            <!--Club_form-->
+
+                            <div id="club_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden">
+                                <div>
+                                    <label for="club-name" class="block text-lg font-medium text-gray-700">Club</label>
+                                    <input type="text" id="club-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                </div>
+
+                                <div>
+                                    <label for="logo-photo" class="block text-lg font-medium text-gray-700">logo</label>
+                                    <input type="url" id="logo-photo" placeholder="Logo URL" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                </div>
+                            </div>
+
+                            <!--player_form-->
+
+                            <div id="player_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] ">
+                            
                             <input type="hidden" id="player-id">
 
                             <!-- Name -->
@@ -184,7 +211,7 @@
                             <!-- Photo -->
                             <div>
                                 <label for="player-photo" class="block text-lg font-medium text-gray-700">Photo</label>
-                                <input type="url" id="player-photo" placeholder="Photo URL" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="file" id="profile-photo" name="profile-photo" accept="image/*"/>
                             </div>
 
                             <!-- Position -->
@@ -201,7 +228,7 @@
                                     <option value="CB2">Center Back2</option>
                                     <option value="CB1">Center Back1</option>
                                     <option value="LW">Left Winger</option>
-                                    <option value="GK">Goalkeeper</option>
+                                    <option class="hidden" value="GK">Goalkeeper</option>
                                     <option value="CM1">Central Defensive Midfielder1</option>
                                     <option value="CM2">Central Defensive Midfielder2</option>
                                     <option value="CM3">Central Defensive Midfielder3</option>
@@ -213,43 +240,60 @@
                             <!-- Nationality -->
                             <div>
                                 <label for="player-nationality" class="block text-lg font-medium text-gray-700">Nationality</label>
-                                <input type="text" id="player-nationality" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <select
+                                    id="player-nationality"
+                                    class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
+                                    <option value="" disabled selected hidden>
+                                    Choose a nationality
+                                    </option>
+                                    <?php 
+                                    
+                                    foreach ($nationalityData as $row){
+                                        echo '<option value="'.$row['nationality'].'" >'.$row['nationality'].'</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
-
                             <!-- Club -->
                             <div>
                                 <label for="player-club" class="block text-lg font-medium text-gray-700">Club</label>
-                                <input type="text" id="player-club" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <select
+                                    id="player-club"
+                                    class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
+                                    <option value="" disabled selected hidden>
+                                    Choose a Club
+                                    </option>
+                                </select>
                             </div>
 
-                            <!-- Stats -->
+                            <!-- Statistiques -->
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
                                 <div>
                                 <label for="player-rating" class="block text-lg font-medium text-gray-700">Rating</label>
                                 <input type="number" id="player-rating" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
-                                <label for="player-pace" class="block text-lg font-medium text-gray-700">Pace</label>
+                                <label for="player-pace" id="pace-label" class="block text-lg font-medium text-gray-700">Pace</label>
                                 <input type="number" id="player-pace" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
-                                <label for="player-shooting" class="block text-lg font-medium text-gray-700">Shooting</label>
+                                <label for="player-shooting" id="shooting-label" class="block text-lg font-medium text-gray-700">Shooting</label>
                                 <input type="number" id="player-shooting" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
-                                <label for="player-passing" class="block text-lg font-medium text-gray-700">Passing</label>
+                                <label for="player-passing" id="passing-label" class="block text-lg font-medium text-gray-700">Passing</label>
                                 <input type="number" id="player-passing" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
-                                <label for="player-dribbling" class="block text-lg font-medium text-gray-700">Dribbling</label>
+                                <label for="player-dribbling" id="dribbling-label" class="block text-lg font-medium text-gray-700">Dribbling</label>
                                 <input type="number" id="player-dribbling" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
-                                <label for="player-defending" class="block text-lg font-medium text-gray-700">Defending</label>
+                                <label for="player-defending" id="defending-label" class="block text-lg font-medium text-gray-700">Defending</label>
                                 <input type="number" id="player-defending" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
-                                <label for="player-physical" class="block text-lg font-medium text-gray-700">Physical</label>
+                                <label for="player-physical" id="physical-label" class="block text-lg font-medium text-gray-700">Physical</label>
                                 <input type="number" id="player-physical" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                             </div>
@@ -271,8 +315,3 @@
 
 </body>
 </html>
-
-<?php
-    include("DBConnexion.php");
-    
-?>
