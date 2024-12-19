@@ -1,12 +1,20 @@
 const addItem =document.getElementById("addItem")
 const btnCancel =document.getElementById("form-cancel")
 const btnClose =document.getElementById("close")
-const playerForm=  document.getElementById("modal-task")
+const form=  document.getElementById("modal-task")
 const playerInputs=  document.querySelector("modal-body")
 const nationalityInputs=  document.querySelector("modal-body")
 const clubInputs=  document.querySelector("modal-body")
 const formTitle =document.getElementById("formTitle")
 const selectPosition=document.getElementById("Position")
+const imgForm=  document.getElementById("img_form")
+const UploadImg=document.getElementById("upImg")
+const playerForm=document.getElementById("player_form")
+const btnSave=document.getElementById("player-save-btn")
+const btnUpdateForm=document.getElementById("updateForm")
+const showUpdateBtns=document.querySelectorAll(".showUpdateBtn")
+
+
 
 
 
@@ -17,12 +25,18 @@ function switchTable(tableToShow,table1ToHide,table2ToHide,table3ToHide,item){
   document.getElementById(table2ToHide).classList="w-full border-collapse text-center hidden"
   document.getElementById(table3ToHide).classList="w-full border-collapse text-center hidden"
   addItem.textContent=item
+  switchInputForm(item)
+}
+  function switchInputForm(item){
+  
   formTitle.textContent=item
+  
   if(item==="Add Player"){
 
     document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] "
     document.getElementById("nationality_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
+    imgForm.classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
 
     document.getElementById("pace-label").textContent="Pace"
     document.getElementById("shooting-label").textContent="Shooting"
@@ -38,18 +52,20 @@ function switchTable(tableToShow,table1ToHide,table2ToHide,table3ToHide,item){
     document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("nationality_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] "
     document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
+    imgForm.classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
 
   }else if(item==="Add Club"){
 
     document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("nationality_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] "
+    imgForm.classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
   }else if(item==="Add GoalKeeper"){
 
     document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] "
     document.getElementById("nationality_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden "
-
+    imgForm.classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
 
     document.getElementById("pace-label").textContent="Diving"
     document.getElementById("shooting-label").textContent="Handling"
@@ -65,15 +81,50 @@ function switchTable(tableToShow,table1ToHide,table2ToHide,table3ToHide,item){
 }
 
 addItem.addEventListener("click",()=>{
-  playerForm.classList.remove("hidden")
+  form.classList.remove("hidden")
+  switchInputForm(addItem.textContent)
+   
 })
 btnCancel.addEventListener("click",(event)=>{
   event.preventDefault();
-  playerForm.classList.add("hidden")
+  form.classList.add("hidden")
+  btnUpdateForm.classList="hidden"
+  btnSave.classList.remove("hidden")
+
 })
 btnClose.addEventListener("click",(event)=>{
   event.preventDefault();
-  playerForm.classList.add("hidden")
+  form.classList.add("hidden")
+  btnUpdateForm.classList="hidden"
+  btnSave.classList.remove("hidden")
+
+})
+btnSave.addEventListener("click",(event)=>{
+  selectPosition.disabled = false;
+
 })
 
+btnUpdateForm.addEventListener("click",(event)=>{
+  selectPosition.disabled = false;
+
+})
+UploadImg.addEventListener("click",()=>{
+  document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
+  document.getElementById("nationality_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
+  document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden "
+  imgForm.classList.remove("hidden")
+  form.classList.remove("hidden")
+  formTitle.textContent="Upload Photo"
+
+})
+
+showUpdateBtns.forEach((showUpdateBtn)=>{
+  showUpdateBtn.addEventListener("click",()=>{
+
+    form.classList.remove("hidden")
+    switchInputForm(addItem.textContent)
+btnUpdateForm.classList.remove("hidden")
+btnSave.classList.add("hidden")
+  })
+})
 
