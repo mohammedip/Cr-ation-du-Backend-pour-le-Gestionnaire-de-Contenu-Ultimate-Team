@@ -1,7 +1,6 @@
 <?php
-    include("DBConnexion.php");
-    include("CRUD.php");
-$arr =["morocco","argentine","spain","tunisia"]
+    include("./CRUD/Read.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,7 @@ $arr =["morocco","argentine","spain","tunisia"]
 </head>
 <body class="bg-gray-100">
     <div class="flex">
-        <aside class="w-64 bg-gray-800 text-white h-screen">
+        <aside class="w-64 bg-gray-800 text-white ">
             <div class="p-4 text-center font-bold text-2xl border-b border-gray-700">
                 Admin
             </div>
@@ -54,10 +53,19 @@ $arr =["morocco","argentine","spain","tunisia"]
 
             <div class="bg-white p-6 rounded shadow">
                 <div class="flex justify-between items-center mb-5">
-                    <h2 class=" text-xl font-semibold mb-4">Recent Transactions</h2>
-                    <button id="addItem" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add Player</button>
+                    <button id="upImg" type="button" class="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600"> Upload Photo</button>
+                    <div class="relative">
+                        <i class="fa fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                        <input
+                            class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-500 rounded-md pl-10 pr-3 py-2 
+                            transition duration-300 ease-in-out focus:outline-none focus:border-black hover:border-black shadow-sm focus:shadow"
+                            placeholder="Search" />
+                    </div>
+                     <button id="addItem" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add Player</button>
                 </div>
-                <table id="playerTable" class="w-full border-collapse text-center">
+               
+
+                <table id="playerTable" class="w-full border-collapse text-center ">
                     <thead>
                         <tr class="bg-gray-100 border-b">
                             <th class="py-2 px-4 hidden">id</th>
@@ -71,20 +79,22 @@ $arr =["morocco","argentine","spain","tunisia"]
                         </tr>
                     </thead>
                     <tbody>
+
                         <?php 
                                         
                                         foreach ($playerData as $row){
+                                            $id=$row['player_id'];
                                             echo '<tr class="border-b">
-                                            <td class="py-2 px-4 hidden">'.$row['palayer_id'].'</td>
-                                            <td class="py-2 px-4 flex justify-center"> <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="w-12"/> </td>
+                                            <td class="py-2 px-4 hidden">'.$row['player_id'].'</td>
+                                            <td class="py-2 px-4 flex justify-center"> <img src="'.$row['img'].'" alt="" class="w-12"/> </td>
                                             <td class="py-2 px-4">'.$row['nom'].'</td>
                                             <td class="py-2 px-4">'.$row['posiition'].'</td>
                                             <td class="py-2 px-4">'.$row['nationality'].'</td>
-                                            <td class="py-2 px-4">Real madrid</td>
+                                            <td class="py-2 px-4">'.$row['club'].'</td>
                                             <td class="py-2 px-4 ">'.$row['rating'].'</td>
                                             <td> 
-                                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
+                                                <button ><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
+                                                <a href="./CRUD/Delete.php?id='.$id.'&table=player" ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></a>
                                             </td>    
                                         </tr>';
                                         }
@@ -104,36 +114,53 @@ $arr =["morocco","argentine","spain","tunisia"]
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b">
-                            <td class="py-2 px-4 flex justify-center"> <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="" class="w-12"/> </td>
-                            <td class="py-2 px-4">#001</td>
-                            <td class="py-2 px-4">$150</td>
-                            <td class="py-2 px-4">$150</td>
-                            <td class="py-2 px-4 ">25</td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td>    
-                        </tr>
+                       
+                    <?php 
+                                        
+                                        foreach ($goalkeeperData as $row){
+                                            $id=$row['goalkeeper_id'];
+                                            echo '<tr class="border-b">
+                                            <td class="py-2 px-4 hidden">'.$row['goalkeeper_id'].'</td>
+                                            <td class="py-2 px-4 flex justify-center"> <img src="'.$row['img'].'" alt="" class="w-12"/> </td>
+                                            <td class="py-2 px-4">'.$row['nom'].'</td>
+                                            <td class="py-2 px-4">'.$row['nationality'].'</td>
+                                            <td class="py-2 px-4">'.$row['club'].'</td>
+                                            <td class="py-2 px-4 ">'.$row['rating'].'</td>
+                                            <td> 
+                                                <button><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
+                                                <a href="./CRUD/Delete.php?id='.$id.'&table=goalkeeper"><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></a>
+                                            </td>    
+                                        </tr>';
+                                        }
+                        ?>
+                        
                     </tbody>
                 </table>
                 <table id="nationalityTable" class="w-full border-collapse text-center hidden">
                     <thead>
                         <tr class="bg-gray-100 border-b">
+                            <th class="py-2 px-4 hidden">id</th>
                             <th class="py-2 px-4">Nationality</th>
                             <th class="py-2 px-4">Flag</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b">
-                            <td class="py-2 px-4">#001  </td>
-                            <td class="py-2 px-4 flex justify-center"><img src="https://cdn.sofifa.net/flags/ar.png" alt="" class="w-12"/></td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td>    
-                        </tr>
+                        <?php 
+                                        
+                                foreach ($nationalityData as $row){
+                                    $id=$row['nationality_id'];
+                                echo '<tr class="border-b">
+                                        <td class="py-2 px-4 hidden">'.$row['nationality_id'].'  </td>
+                                        <td class="py-2 px-4">'.$row['nationality'].'</td>
+                                        <td class="py-2 px-4 flex justify-center"><img src="'.$row['flaag'].'" alt="" class="w-12"/></td>
+                                        <td> 
+                                            <button ><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
+                                            
+                                        </td>    
+                                    </tr>';
+                                        }
+                        ?>
                     </tbody>
                 </table>
                 <table id="clubTable" class="w-full border-collapse text-center hidden">
@@ -145,14 +172,22 @@ $arr =["morocco","argentine","spain","tunisia"]
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b">
-                            <td class="py-2 px-4 ">#001  </td>
-                            <td class="py-2 px-4 flex justify-center"><img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="" class="w-12"/></td>
-                            <td> 
-                                <button  ><i class=" fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                <button ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></button>
-                            </td>    
-                        </tr>
+                    <?php 
+                               
+                            foreach ($clubData as $row){
+                                $id=$row['club_id'];
+                                echo '
+                                <tr class="border-b">
+                                    <td class="py-2 px-4 hidden">'.$row['club_id'].'</td>
+                                    <td class="py-2 px-4 ">'.$row['club'].' </td>
+                                    <td class="py-2 px-4 flex justify-center"><img src="'.$row['img'].'" alt="" class="w-12"/></td>
+                                    <td> 
+                                        <button ><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
+                                        
+                                    </td>    
+                                </tr>';
+                                        }
+                        ?>
                     </tbody>
                 </table>
                
@@ -161,24 +196,33 @@ $arr =["morocco","argentine","spain","tunisia"]
             <div class="task-modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 " id="modal-task">
                     <div class="modal-dialog bg-white rounded-lg shadow-lg min-w-[620px] max-w-[620px]">
                         <div class="modal-content ">
-                        <form method="POST" id="form-player" class="p-4" enctype="multipart/form-data" action="dashboard.php">
+                        <form method="POST" id="form-player" class="p-4" enctype="multipart/form-data" action="./CRUD/Add.php">
                             
-                            <div class="modal-header flex justify-between items-center border-b pb-3">
+                            <div class="modal-header flex justify-between items-center border-b  pb-1">
                             <h5 id="formTitle" class="text-lg font-semibold">Add Player</h5>
                             <button id="close"><i class="fa-solid fa-xmark fa-xl" style="color: #8a8f99;"></i></button>
                             </div>
+                            <!-- img form -->
+
+                            <div id="img_form" class="modal-body space-y-4 mt-4 flex justify-center  p-3 max-h-[83vh] hidden">
+                               
+                                <input type="file" id="profile-photo" name="profile-photo" accept="image/*" class="hidden" />
+                                <label for="profile-photo" class="px-4 py-2 bg-gray-200 text-slate-700 rounded cursor-pointer hover:bg-gray-300">
+                                    Upload Photo
+                                </label>
+                            </div>    
 
                             <!--Nationality_form-->
 
                             <div id="nationality_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden">
                                 <div>
                                     <label for="Nationality-name" class="block text-lg font-medium text-gray-700">Nationality</label>
-                                    <input type="text" id="Nationality-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                    <input type="text" name="Nationality-name" id="Nationality-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
 
                                 <div>
                                     <label for="flag-photo" class="block text-lg font-medium text-gray-700">Flag</label>
-                                    <input type="url" id="flag-photo" placeholder="Flag URL" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                    <input type="url" name="flag-photo" id="flag-photo" placeholder="Flag URL" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                             </div>
 
@@ -187,38 +231,62 @@ $arr =["morocco","argentine","spain","tunisia"]
                             <div id="club_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden">
                                 <div>
                                     <label for="club-name" class="block text-lg font-medium text-gray-700">Club</label>
-                                    <input type="text" id="club-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                    <input type="text" name="club" id="club-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
 
                                 <div>
-                                    <label for="logo-photo" class="block text-lg font-medium text-gray-700">logo</label>
-                                    <input type="url" id="logo-photo" placeholder="Logo URL" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                    <label for="img-club" class="block text-lg font-medium text-gray-700">logo</label>
+                                    <select
+                                    id="img-club" name="logo"
+                                    class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
+                                    <option value="" disabled selected hidden>
+                                    Choose a logo
+                                    </option>
+                                    <?php 
+                                    
+                                    foreach ($imgData as $row){
+                                        echo '<option value="'.$row['id_img'].'" >'.$row['name_img'].'</option>';
+                                    }
+                                    ?>
+                                </select>
                                 </div>
                             </div>
 
                             <!--player_form-->
 
-                            <div id="player_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] ">
+                            <div id="player_form" class="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden ">
                             
                             <input type="hidden" id="player-id">
 
                             <!-- Name -->
                             <div>
                                 <label for="player-name" class="block text-lg font-medium text-gray-700">Name</label>
-                                <input type="text" id="player-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="text" name="player-name" id="player-name" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                             </div>
 
                             <!-- Photo -->
                             <div>
                                 <label for="player-photo" class="block text-lg font-medium text-gray-700">Photo</label>
-                                <input type="file" id="profile-photo" name="profile-photo" accept="image/*"/>
+                                <select
+                                    id="player-photo" name="player-photo"
+                                    class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
+                                    <option value="" disabled selected hidden>
+                                    Choose a profile
+                                    </option>
+                                    <?php 
+                                    
+                                    foreach ($imgData as $row){
+                                        echo '<option value="'.$row['id_img'].'" >'.$row['name_img'].'</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
 
                             <!-- Position -->
                             <div>
                                 <label for="player-position" class="block text-lg font-medium text-gray-700">Position</label>
                                 <select
-                                    id="Position"
+                                    id="Position" name="player-position"
                                     class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
                                     <option value="" disabled selected hidden>
                                     Choose the position
@@ -241,7 +309,7 @@ $arr =["morocco","argentine","spain","tunisia"]
                             <div>
                                 <label for="player-nationality" class="block text-lg font-medium text-gray-700">Nationality</label>
                                 <select
-                                    id="player-nationality"
+                                    id="player-nationality" name="player-nationality"
                                     class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
                                     <option value="" disabled selected hidden>
                                     Choose a nationality
@@ -249,7 +317,7 @@ $arr =["morocco","argentine","spain","tunisia"]
                                     <?php 
                                     
                                     foreach ($nationalityData as $row){
-                                        echo '<option value="'.$row['nationality'].'" >'.$row['nationality'].'</option>';
+                                        echo '<option value="'.$row['nationality_id'].'" >'.$row['nationality'].'</option>';
                                     }
                                     ?>
                                 </select>
@@ -258,11 +326,17 @@ $arr =["morocco","argentine","spain","tunisia"]
                             <div>
                                 <label for="player-club" class="block text-lg font-medium text-gray-700">Club</label>
                                 <select
-                                    id="player-club"
+                                    id="player-club" name="player-club"
                                     class=" border text-sm rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-500 block p-2.5">
                                     <option value="" disabled selected hidden>
                                     Choose a Club
                                     </option>
+                                    <?php 
+                                    
+                                    foreach ($clubData as $row){
+                                        echo '<option value="'.$row['club_id'].'" >'.$row['club'].'</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
 
@@ -270,40 +344,44 @@ $arr =["morocco","argentine","spain","tunisia"]
                             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
                                 <div>
                                 <label for="player-rating" class="block text-lg font-medium text-gray-700">Rating</label>
-                                <input type="number" id="player-rating" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-rating" id="player-rating" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                 <label for="player-pace" id="pace-label" class="block text-lg font-medium text-gray-700">Pace</label>
-                                <input type="number" id="player-pace" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-pace" id="player-pace" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                 <label for="player-shooting" id="shooting-label" class="block text-lg font-medium text-gray-700">Shooting</label>
-                                <input type="number" id="player-shooting" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-shooting" id="player-shooting" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                 <label for="player-passing" id="passing-label" class="block text-lg font-medium text-gray-700">Passing</label>
-                                <input type="number" id="player-passing" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-passing" id="player-passing" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                 <label for="player-dribbling" id="dribbling-label" class="block text-lg font-medium text-gray-700">Dribbling</label>
-                                <input type="number" id="player-dribbling" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-dribbling" id="player-dribbling" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                 <label for="player-defending" id="defending-label" class="block text-lg font-medium text-gray-700">Defending</label>
-                                <input type="number" id="player-defending" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-defending" id="player-defending" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                                 <div>
                                 <label for="player-physical" id="physical-label" class="block text-lg font-medium text-gray-700">Physical</label>
-                                <input type="number" id="player-physical" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                                <input type="number" name="player-physical" id="player-physical" min="0" max="100" class="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                                 </div>
                             </div>
                             </div>
 
                             <!-- Footer -->
-                            <div class="modal-footer flex justify-end space-x-3 pt-4 border-t">
+                             <?php
+                             echo 
+                            '<div class="modal-footer flex justify-end space-x-3 pt-4 border-t">
                             <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md shadow hover:bg-gray-200" id="form-cancel">Cancel</button>
+                            <a href="./CRUD/Update.php?id='.$id.'" id="updateForm" class="hidden"><i class=" fa-solid fa-pen-to-square px-5 py-3 bg-green-500 text-white rounded hover:bg-green-600" ></i></a>
                             <button class="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600" id="player-save-btn">Save</button>
-                            </div>
+                            </div>'
+                            ?>
                         </form>
                         </div>
                     </div>
