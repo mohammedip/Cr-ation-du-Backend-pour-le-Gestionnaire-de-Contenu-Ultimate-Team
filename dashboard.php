@@ -1,6 +1,7 @@
 <?php
     include("./CRUD/Read.php");
 
+    
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
@@ -79,11 +81,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <script>
+                            const upBtn = document.getElementById("upBtn");
 
+                            if (upBtn.href.includes("dashboard.php?id=<?php echo $id; ?>&table=updatePlayer")) {
+
+                                <?php
+                                if (isset($_GET['table']) && $_GET['table'] === 'updatePlayer') {
+                                    include("./CRUD/getFormData.php");
+                                }
+                                ?>
+                            }
+                        </script>
                         <?php 
                                         
                                         foreach ($playerData as $row){
                                             $id=$row['player_id'];
+                                            
+    
                                             echo '<tr class="border-b">
                                             <td class="py-2 px-4 hidden">'.$row['player_id'].'</td>
                                             <td class="py-2 px-4 flex justify-center"> <img src="'.$row['img'].'" alt="" class="w-12"/> </td>
@@ -93,8 +108,8 @@
                                             <td class="py-2 px-4">'.$row['club'].'</td>
                                             <td class="py-2 px-4 ">'.$row['rating'].'</td>
                                             <td> 
-                                                <button ><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                                <a href="./CRUD/Delete.php?id='.$id.'&table=player" ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></a>
+                                                <a href="./dashboard.php?id='.$id.'&table=updatePlayer" id="upBtn" ><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></a>
+                                                <a href="./CRUD/playerCRUD.php?id='.$id.'&table=delete" ><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></a>
                                             </td>    
                                         </tr>';
                                         }
@@ -128,7 +143,7 @@
                                             <td class="py-2 px-4 ">'.$row['rating'].'</td>
                                             <td> 
                                                 <button><i class="showUpdateBtn fa-solid fa-pen-to-square px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" ></i></button>
-                                                <a href="./CRUD/Delete.php?id='.$id.'&table=goalkeeper"><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></a>
+                                                <a href="./CRUD/goalkeeperCRUD.php?id='.$id.'&table=delete"><i class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 fa-solid fa-trash" ></i></a>
                                             </td>    
                                         </tr>';
                                         }
@@ -196,7 +211,7 @@
             <div class="task-modal hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 " id="modal-task">
                     <div class="modal-dialog bg-white rounded-lg shadow-lg min-w-[620px] max-w-[620px]">
                         <div class="modal-content ">
-                        <form method="POST" id="form-player" class="p-4" enctype="multipart/form-data" action="./CRUD/Add.php">
+                        <form method="POST" id="form-player" class="p-4" enctype="multipart/form-data" action="./CRUD/playerCRUD.php">
                             
                             <div class="modal-header flex justify-between items-center border-b  pb-1">
                             <h5 id="formTitle" class="text-lg font-semibold">Add Player</h5>
@@ -378,7 +393,7 @@
                              echo 
                             '<div class="modal-footer flex justify-end space-x-3 pt-4 border-t">
                             <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md shadow hover:bg-gray-200" id="form-cancel">Cancel</button>
-                            <a href="./CRUD/Update.php?id='.$id.'" id="updateForm" class="hidden"><i class=" fa-solid fa-pen-to-square px-5 py-3 bg-green-500 text-white rounded hover:bg-green-600" ></i></a>
+                            <a href="./CRUD/playerCRUD.php?id='.$id.'&table=update" id="updateForm" class="hidden"><i class=" fa-solid fa-pen-to-square px-5 py-3 bg-green-500 text-white rounded hover:bg-green-600" ></i></a>
                             <button class="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600" id="player-save-btn">Save</button>
                             </div>'
                             ?>

@@ -45,7 +45,11 @@ function switchTable(tableToShow,table1ToHide,table2ToHide,table3ToHide,item){
     document.getElementById("defending-label").textContent="Defending"
     document.getElementById("physical-label").textContent="Physical"
 
+    form.action="./CRUD/playerCRUD.php"
+    btnUpdateForm.href="./CRUD/playerCRUD.php?id='.$id.'"
+
     selectPosition.disabled = false;
+    selectPosition.value = "RW";
 
   }else if(item==="Add Nationality"){
 
@@ -54,12 +58,19 @@ function switchTable(tableToShow,table1ToHide,table2ToHide,table3ToHide,item){
     document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     imgForm.classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
 
+    form.action="./CRUD/nationalityCRUD.php"
+    btnUpdateForm.href="./CRUD/nationalityCRUD.php?id='.$id.'"
+
   }else if(item==="Add Club"){
 
     document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("nationality_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
     document.getElementById("club_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] "
     imgForm.classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] hidden"
+
+    form.action="./CRUD/clubCRUD.php"
+    btnUpdateForm.href="./CRUD/clubCRUD.php?id='.$id.'"
+
   }else if(item==="Add GoalKeeper"){
 
     document.getElementById("player_form").classList="modal-body space-y-4 mt-4 overflow-y-auto max-h-[83vh] "
@@ -73,6 +84,9 @@ function switchTable(tableToShow,table1ToHide,table2ToHide,table3ToHide,item){
     document.getElementById("dribbling-label").textContent="Reflexes"
     document.getElementById("defending-label").textContent="Speed"
     document.getElementById("physical-label").textContent="Positioning"
+
+    form.action="./CRUD/goalkeeperCRUD.php"
+    btnUpdateForm.href="./CRUD/goalkeeperCRUD.php?id='.$id.'"
 
     selectPosition.disabled = true;
     selectPosition.value = "GK";
